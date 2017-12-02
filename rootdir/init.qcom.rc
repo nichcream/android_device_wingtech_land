@@ -639,16 +639,6 @@ service poweroffhandler /system/bin/poweroffhandler
     disabled
     oneshot
 
-service fps_hal /vendor/bin/hw/android.hardware.biometrics.fingerprint@2.0-service-custom
-    # "class hal" causes a race condition on some devices due to files created
-    # in /data. As a workaround, postpone startup until later in boot once
-    # /data is mounted.
-    class late_start
-    socket fpce stream 0666 system system
-    user system
-    group system sdcard_rw
-    disabled
-
 service gx_fpd /system/bin/gx_fpd
     class core
     user root
