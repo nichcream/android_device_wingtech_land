@@ -617,7 +617,7 @@ vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc
 vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0_vendor.so
 
-# QMI - from tissot (Mi A1)
+# QMI - from gemini (Mi 5)
 lib/libdiag_system.so
 lib/libqmi_cci_system.so
 lib64/libdiag_system.so
@@ -657,9 +657,8 @@ vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
 vendor/lib64/libsmemlog.so
 
-# Radio - from tissot (Mi A1)
+# Radio - from gemini (Mi 5)
 -app/datastatusnotification/datastatusnotification.apk
--app/SimSettings/SimSettings.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
 -app/radioconfig/radioconfig.apk
 etc/permissions/qcrilhook.xml
