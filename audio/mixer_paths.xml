@@ -1124,17 +1124,6 @@
     <path name="bt-sco-mic-wb">
     </path>
 
-    <!-- speaker & bt-sco combo -->
-    <path name="speaker-and-bt-sco">
-         <path name="speaker" />
-         <path name="bt-sco" />
-    </path>
-
-    <path name="speaker-and-bt-sco-wb">
-         <path name="speaker" />
-         <path name="bt-sco-wb" />
-    </path>
-
     <path name="usb-headset-mic">
     </path>
 
