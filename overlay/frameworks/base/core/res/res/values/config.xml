@@ -477,4 +477,8 @@
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
     in hardware. -->
     <bool name="config_setColorTransformAccelerated">true</bool>
+    
+    <!-- Get rid of button backlight option -->
+    <integer name="config_buttonBrightnessSettingDefault">0</integer>
+
 </resources>
