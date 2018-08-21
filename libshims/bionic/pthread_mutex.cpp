@@ -37,6 +37,8 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
+#include "private/bionic_lock.h"
+
 /*
 #include "pthread_internal.h"
 
