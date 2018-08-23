@@ -269,7 +269,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libshim_cameraservice \
     libshim_mutexdestroy \
-    libshim_pthreadts
+    libshim_pthreads
 
 # Lights
 PRODUCT_PACKAGES += \
