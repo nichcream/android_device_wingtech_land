@@ -268,7 +268,7 @@ PRODUCT_PACKAGES += \
 # Libshims
 PRODUCT_PACKAGES += \
     libshim_cameraservice \
-    libshim_pthreadts
+    libshim_pthreads
 
 # Lights
 PRODUCT_PACKAGES += \

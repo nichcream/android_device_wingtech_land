@@ -17,10 +17,11 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
+    bionic/bionic_futex.cpp \
     bionic/bionic_time_conversions.cpp \
     bionic/pthread_cond.cpp
 LOCAL_SHARED_LIBRARIES := libc
-LOCAL_MODULE := libshim_pthreadts
+LOCAL_MODULE := libshim_pthreads
 LOCAL_VENDOR_MODULE := true
 # TODO: remove as soon as we find out why Clang breaks camera preflash
 LOCAL_CLANG := false

@@ -190,7 +190,7 @@ MALLOC_SVELTE := true
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 67108864
 BOARD_CACHEIMAGE_PARTITION_SIZE    := 258998272
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 3119513600 
+BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 3119513600
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 10365157376 #10365173760 - 16384 use the 16gb version
 BOARD_FLASH_BLOCK_SIZE 		   := 131072
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE  := ext4
@@ -216,8 +216,8 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Shims
-TARGET_LD_SHIM_LIBS := /vendor/bin/mm-qcamera-daemon|libshim_pthreadts.so \
-    /system/bin/cameraserver|libshim_cameraservice.so
+TARGET_LD_SHIM_LIBS := /vendor/bin/mm-qcamera-daemon|libshim_pthreads.so \
+                       /system/bin/cameraserver|libshim_cameraservice.so
 
 # Wi-Fi
 BOARD_HAS_QCOM_WLAN := true
