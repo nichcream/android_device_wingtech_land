@@ -678,7 +678,7 @@ service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
-    setenv LD_PRELOAD "libshim_pthreadts.so:libshim_mutexdestroy.so"
+    setenv LD_PRELOAD "libshim_pthreads.so:libshim_mutexdestroy.so"
 
 # Start camera provider later for encrypted devices
 on property:vold.decrypt=trigger_restart_framework
