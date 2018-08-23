@@ -207,13 +207,13 @@ static void FreeId(int id) {
 #define  MUTEX_STATE_BITS_LOCKED_UNCONTENDED  MUTEX_STATE_TO_BITS(MUTEX_STATE_LOCKED_UNCONTENDED)
 #define  MUTEX_STATE_BITS_LOCKED_CONTENDED    MUTEX_STATE_TO_BITS(MUTEX_STATE_LOCKED_CONTENDED)
 
-// Return true iff the mutex is unlocked.
+// Return true if the mutex is unlocked.
 #define MUTEX_STATE_BITS_IS_UNLOCKED(v) (((v) & MUTEX_STATE_MASK) == MUTEX_STATE_BITS_UNLOCKED)
 
-// Return true iff the mutex is locked with no waiters.
+// Return true if the mutex is locked with no waiters.
 #define MUTEX_STATE_BITS_IS_LOCKED_UNCONTENDED(v)  (((v) & MUTEX_STATE_MASK) == MUTEX_STATE_BITS_LOCKED_UNCONTENDED)
 
-// return true iff the mutex is locked with maybe waiters.
+// return true if the mutex is locked with maybe waiters.
 #define MUTEX_STATE_BITS_IS_LOCKED_CONTENDED(v)   (((v) & MUTEX_STATE_MASK) == MUTEX_STATE_BITS_LOCKED_CONTENDED)
 
 /* used to flip from LOCKED_UNCONTENDED to LOCKED_CONTENDED */
@@ -334,7 +334,7 @@ static_assert(alignof(pthread_mutex_t) == 4,
               "pthread_mutex_t should fulfill the alignment of pthread_mutex_internal_t.");
 
 static inline pthread_mutex_internal_t* __get_internal_mutex(pthread_mutex_t* mutex_interface) {
-  return reinterpret_cast<pthread_mutex_internal_t*>(mutex_interface);
+    return reinterpret_cast<pthread_mutex_internal_t*>(mutex_interface);
 }
 
 static inline __always_inline bool IsMutexDestroyed(uint16_t mutex_state) {
