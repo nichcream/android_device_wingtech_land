@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2008 The Android Open Source Project
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,58 +26,26 @@
  * SUCH DAMAGE.
  */
 
-#ifndef _BIONIC_TIME_CONVERSIONS_H
-#define _BIONIC_TIME_CONVERSIONS_H
+#include <pthread.h>
+#include <dlfcn.h>
 
 #include <errno.h>
 #include <time.h>
-#include <sys/cdefs.h>
 
-#include "private/bionic_constants.h"
+// From bionic_constants.h
+#define NS_PER_S 1000000000
 
-__BEGIN_DECLS
-
-__LIBC_HIDDEN__ bool timespec_from_timeval(timespec& ts, const timeval& tv);
-__LIBC_HIDDEN__ void timespec_from_ms(timespec& ts, const int ms);
-
-__LIBC_HIDDEN__ void timeval_from_timespec(timeval& tv, const timespec& ts);
-
-__END_DECLS
-
-static inline int check_timespec(const timespec* ts, bool null_allowed) {
-  if (null_allowed && ts == nullptr) {
-    return 0;
-  }
-#if 1
-  // HAX: Timespec checks are failing if tv_nsec < 1000000000L (aka 1 sec).
-  // Take out each second from tv_nsec and add them to tv_sec till tv_nsec is
+int pthread_cond_timedwait(pthread_cond_t *cond_interface, pthread_mutex_t * mutex,
+                           const timespec *abstime) {
+  // HAX: Timespec checks are failing if tv_nsec >= 1000000000L (aka 1 sec).
+  // Increment tv_sec while subtracting NS_PER_S from tv_nsec till tv_nsec is
   // < 1000000000L such that tv_nsec doesn't overflow and passes check_timespec().
-  while (ts->tv_nsec >= NS_PER_S) {
-    const_cast<timespec*>(ts)->tv_nsec -= NS_PER_S;
-    const_cast<timespec*>(ts)->tv_sec += 1;
+  while (abstime->tv_nsec >= NS_PER_S) {
+    const_cast<timespec*>(abstime)->tv_nsec -= NS_PER_S;
+    const_cast<timespec*>(abstime)->tv_sec++;
   }
-#endif
-  // glibc just segfaults if you pass a null timespec.
-  // That seems a lot more likely to catch bad code than returning EINVAL.
-  if (ts->tv_nsec < 0 || ts->tv_nsec >= NS_PER_S) {
-    return EINVAL;
-  }
-  if (ts->tv_sec < 0) {
-    return ETIMEDOUT;
-  }
-  return 0;
-}
 
-#if !defined(__LP64__)
-static inline void absolute_timespec_from_timespec(timespec& abs_ts, const timespec& ts, clockid_t clock) {
-  clock_gettime(clock, &abs_ts);
-  abs_ts.tv_sec += ts.tv_sec;
-  abs_ts.tv_nsec += ts.tv_nsec;
-  if (abs_ts.tv_nsec >= NS_PER_S) {
-    abs_ts.tv_nsec -= NS_PER_S;
-    abs_ts.tv_sec++;
-  }
+  int (*real_pthread_cond_timedwait)(pthread_cond_t*, pthread_mutex_t*, const timespec*);
+  *(void **)&real_pthread_cond_timedwait = dlsym(RTLD_NEXT, "pthread_cond_timedwait");
+  return real_pthread_cond_timedwait(cond_interface, mutex, abstime);
 }
-#endif
-
-#endif
