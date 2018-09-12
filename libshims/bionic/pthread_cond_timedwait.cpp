@@ -49,3 +49,10 @@ int pthread_cond_timedwait(pthread_cond_t *cond_interface, pthread_mutex_t * mut
   *(void **)&real_pthread_cond_timedwait = dlsym(RTLD_NEXT, "pthread_cond_timedwait");
   return real_pthread_cond_timedwait(cond_interface, mutex, abstime);
 }
+
+/* This fixes preflash issue; symbol lookup failure? Curious. */
+int pthread_cond_signal(pthread_cond_t* cond_interface) {
+  int (*real_pthread_cond_signal)(pthread_cond_t*);
+  *(void **)&real_pthread_cond_signal = dlsym(RTLD_NEXT, "pthread_cond_signal");
+  return real_pthread_cond_signal(cond_interface);
+}
