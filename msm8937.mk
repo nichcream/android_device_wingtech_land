@@ -208,7 +208,8 @@ PRODUCT_COPY_FILES += \
 # Healthd
 PRODUCT_PACKAGES += \
     android.hardware.health@2.0-impl \
-    android.hardware.health@2.0-service
+    android.hardware.health@2.0-service \
+    chargeonlymode
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/charger/animation.txt:root/res/values/charger/animation.txt \
