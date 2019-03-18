@@ -494,6 +494,9 @@ on property:sys.boot_completed=1
     #WDSP FW boot sysfs node used by STHAL
     chown media audio /sys/kernel/wdsp0/boot
     chown media audio /sys/kernel/wcd_cpe0/fw_name
+    chown system system /sys/devices/soc/qpnp-smbcharger-17/power_supply/battery/subsystem/bms/hi_power
+    chmod 0664 /sys/devices/soc/qpnp-smbcharger-17/power_supply/battery/subsystem/bms/hi_power
+    write /sys/devices/soc/qpnp-smbcharger-17/power_supply/battery/subsystem/bms/hi_power 1
 
 on property:persist.vendor.radio.atfwd.start=false
     stop vendor.atfwd
